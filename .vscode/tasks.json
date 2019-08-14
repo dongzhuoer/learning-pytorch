@@ -8,8 +8,8 @@
     },
     "tasks": [
         {
-            "label": "build",
-            "command": "echo build",
+            "label": "upload *py to GPU",
+            "command": "scp -P 20000 *{py,sh} zhangqf6@166.111.152.116:zhuoer/scripts; gpu 'scp -r zhangqf6@10.10.235.20:zhuoer/scripts ~'",
             "group": {
                 "kind": "build",
                 "isDefault": true,

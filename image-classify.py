@@ -38,15 +38,13 @@ torch.manual_seed(args.seed)
 
 
 # main workflow ---------
-normalization = transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]) # ImageNet mean and std
-augmentation  = transforms.Compose([ transforms.RandomHorizontalFlip(), transforms.RandomRotation(0.2) ])
-if args.data_augmentation: 
-    transform = transforms.Compose([ transforms.Resize((224, 224)), augmentation, transforms.ToTensor() ])
-else:
-    if args.no_pretrain:
-        transform = transforms.Compose([ transforms.Resize((224, 224)), transforms.ToTensor() ])    
-    else:
-        transform = transforms.Compose([ transforms.Resize((224, 224)), transforms.ToTensor(), normalization ])    
+normalization = torchvision.transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]) # ImageNet mean and std
+augmentation  = torchvision.transforms.Compose([ torchvision.transforms.RandomHorizontalFlip(), torchvision.transforms.RandomRotation(0.2) ])
+
+transform = torchvision.transforms.Compose([            torchvision.transforms.Resize((224, 224)) ])    
+if args.data_augmentation: transform = torchvision.transforms.Compose([ transform, augmentation  ])
+transform = torchvision.transforms.Compose([ transform, torchvision.transforms.ToTensor()         ])    
+if not args.no_pretrain:   transform = torchvision.transforms.Compose([ transform, normalization ])    
 
 
 train_data = torchvision.datasets.ImageFolder(f'{args.data_dir}/train', transform)
