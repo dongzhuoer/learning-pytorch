@@ -25,7 +25,7 @@
         },
         {
             "label": "view GitHub",
-            "command": "google-chrome https://github.com/dongzhuoer/${workspaceFolderBasename} 2> /dev/null",
+            "command": " https://github.com/dongzhuoer/${workspaceFolderBasename} 2> /dev/null",
         },
     ]
 }
